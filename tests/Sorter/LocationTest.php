@@ -94,4 +94,54 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($bpass3, $sortedStack[2]);
         $this->assertEquals($bpass4, $sortedStack[3]);
     }
+
+    public function testBugWhenSortingFourElements()
+    {
+        $bpass1 = $this->getRandomBoardingPass('Rome', 'Milan');
+        $bpass2 = $this->getRandomBoardingPass('Milan', 'Turin');
+        $bpass3 = $this->getRandomBoardingPass('Turin', 'Venice');
+        $bpass4 = $this->getRandomBoardingPass('Venice', 'New York');
+
+        $list = [$bpass4, $bpass2, $bpass1, $bpass3];
+
+        $sorter = new Location;
+        $sortedStack = $sorter->sort($list);
+
+        $this->assertCount(4, $sortedStack);
+        $this->assertEquals($bpass1, $sortedStack[0]);
+        $this->assertEquals($bpass2, $sortedStack[1]);
+        $this->assertEquals($bpass3, $sortedStack[2]);
+        $this->assertEquals($bpass4, $sortedStack[3]);
+    }
+
+    public function testBugWhenSortingTenElements()
+    {
+        $bpass1 = $this->getRandomBoardingPass('Rome', 'Milan');
+        $bpass2 = $this->getRandomBoardingPass('Milan', 'Turin');
+        $bpass3 = $this->getRandomBoardingPass('Turin', 'Venice');
+        $bpass4 = $this->getRandomBoardingPass('Venice', 'New York');
+        $bpass5 = $this->getRandomBoardingPass('New York', 'London');
+        $bpass6 = $this->getRandomBoardingPass('London', 'Dublin');
+        $bpass7 = $this->getRandomBoardingPass('Dublin', 'Madrid');
+        $bpass8 = $this->getRandomBoardingPass('Madrid', 'Lisbon');
+        $bpass9 = $this->getRandomBoardingPass('Lisbon', 'Sydney');
+        $bpass10 = $this->getRandomBoardingPass('Sydney', 'Naples');
+
+        $list = [$bpass4, $bpass2, $bpass1, $bpass3, $bpass5, $bpass6, $bpass7, $bpass8, $bpass9, $bpass10];
+
+        $sorter = new Location;
+        $sortedStack = $sorter->sort($list);
+
+        $this->assertCount(10, $sortedStack);
+        $this->assertEquals($bpass1, $sortedStack[0]);
+        $this->assertEquals($bpass2, $sortedStack[1]);
+        $this->assertEquals($bpass3, $sortedStack[2]);
+        $this->assertEquals($bpass4, $sortedStack[3]);
+        $this->assertEquals($bpass5, $sortedStack[4]);
+        $this->assertEquals($bpass6, $sortedStack[5]);
+        $this->assertEquals($bpass7, $sortedStack[6]);
+        $this->assertEquals($bpass8, $sortedStack[7]);
+        $this->assertEquals($bpass9, $sortedStack[8]);
+        $this->assertEquals($bpass10, $sortedStack[9]);
+    }
 }
