@@ -4,6 +4,10 @@ namespace BoardingPassSorter;
 
 use BoardingPassSorter\Pass\PassInterface;
 
+/**
+ * Class Stack
+ * @package BoardingPassSorter
+ */
 class Stack implements \Countable
 {
     /**
@@ -19,6 +23,9 @@ class Stack implements \Countable
         $this->stack = $boardingPasses;
     }
 
+    /**
+     * @param PassInterface $boardingPass The pass to be added
+     */
     public function add(PassInterface $boardingPass)
     {
         array_push($this->stack, $boardingPass);
@@ -27,7 +34,7 @@ class Stack implements \Countable
     }
 
     /**
-     * @return Departure
+     * @return PassInterface[]
      */
     public function getAll()
     {
@@ -35,6 +42,9 @@ class Stack implements \Countable
     }
 
     // COUNTABLE INTERFACE METHODS
+    /**
+     * @return int
+     */
     public function count()
     {
         return count($this->stack);

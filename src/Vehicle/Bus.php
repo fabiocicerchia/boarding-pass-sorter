@@ -2,6 +2,10 @@
 
 namespace BoardingPassSorter\Vehicle;
 
+/**
+ * Class Bus
+ * @package BoardingPassSorter\Vehicle
+ */
 class Bus extends AbstractVehicle
 {
     /**

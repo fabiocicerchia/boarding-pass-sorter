@@ -2,11 +2,15 @@
 
 namespace BoardingPassSorter;
 
-use BoardingPassSorter\Pass\PassInterface;
-use BoardingPassSorter\Event\Departure;
 use BoardingPassSorter\Event\Arrival;
+use BoardingPassSorter\Event\Departure;
+use BoardingPassSorter\Pass\PassInterface;
 use BoardingPassSorter\Vehicle\AbstractVehicle;
 
+/**
+ * Class Pass
+ * @package BoardingPassSorter
+ */
 class Pass implements PassInterface
 {
     /**
@@ -35,11 +39,11 @@ class Pass implements PassInterface
     protected $details;
 
     /**
-     * @param Departure $origin The journey origin place
-     * @param Arrival $destination The journey destination place
-     * @param AbstractVehicle $vehicle The vehicle used to travel
-     * @param string $seat The reserved seat number
-     * @param array $details The journey details
+     * @param Departure       $origin      The journey origin place
+     * @param Arrival         $destination The journey destination place
+     * @param AbstractVehicle $vehicle     The vehicle used to travel
+     * @param string          $seat        The reserved seat number
+     * @param array           $details     The journey details
      */
     public function __construct(Departure $origin, Arrival $destination, AbstractVehicle $vehicle, $seat = null, array $details = [])
     {

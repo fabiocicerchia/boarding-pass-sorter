@@ -2,6 +2,10 @@
 
 namespace BoardingPassSorter\Sorter;
 
+/**
+ * Class Location
+ * @package BoardingPassSorter\Sorter
+ */
 class Location implements SorterInterface
 {
     /**

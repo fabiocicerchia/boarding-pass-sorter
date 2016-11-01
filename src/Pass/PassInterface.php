@@ -2,10 +2,10 @@
 
 namespace BoardingPassSorter\Pass;
 
-use BoardingPassSorter\Pass\PassInterface;
-use BoardingPassSorter\Event\Departure;
-use BoardingPassSorter\Event\Arrival;
-
+/**
+ * Interface PassInterface
+ * @package BoardingPassSorter\Pass
+ */
 interface PassInterface
 {
     /**

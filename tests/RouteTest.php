@@ -1,6 +1,6 @@
 <?php
 
-namespace BoardingPassSorter\Stack;
+namespace BoardingPassSorter;
 
 use BoardingPassSorter\Event\Departure;
 use BoardingPassSorter\Event\Arrival;
@@ -8,7 +8,7 @@ use BoardingPassSorter\Vehicle\Train;
 use BoardingPassSorter\Pass;
 use \Mockery as m;
 
-class SortedTest extends \PHPUnit_Framework_TestCase
+class RouteTest extends \PHPUnit_Framework_TestCase
 {
     protected $faker;
 
@@ -35,9 +35,10 @@ class SortedTest extends \PHPUnit_Framework_TestCase
         $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
         $sorter->shouldReceive('sort')->times(1)->andReturn([$bpass]);
 
-        $stack = new Sorted($sorter, [$bpass]);
+        $stack = new Stack([$bpass]);
+        $route = new Route($sorter, $stack);
 
-        $this->assertCount(1, $stack);
+        $this->assertCount(1, $route->getLegs());
     }
 
     public function testInitSortedStackWithTwoElement()
@@ -48,9 +49,12 @@ class SortedTest extends \PHPUnit_Framework_TestCase
         $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
         $sorter->shouldReceive('sort')->times(1)->andReturn([$bpass1, $bpass2]);
 
-        $stack = new Sorted($sorter, [$bpass1, $bpass2]);
+        $stack = new Stack([$bpass1, $bpass2]);
+        $route = new Route($sorter, $stack);
 
-        $this->assertCount(2, $stack);
+        $this->assertCount(2, $route->getLegs());
+        $this->assertEquals($bpass1, $route->getStart());
+        $this->assertEquals($bpass2, $route->getEnd());
     }
 
     public function testInitSortedStackWithThreeElement()
@@ -62,8 +66,11 @@ class SortedTest extends \PHPUnit_Framework_TestCase
         $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
         $sorter->shouldReceive('sort')->times(1)->andReturn([$bpass1, $bpass2, $bpass3]);
 
-        $stack = new Sorted($sorter, [$bpass1, $bpass2, $bpass3]);
+        $stack = new Stack([$bpass1, $bpass2, $bpass3]);
+        $route = new Route($sorter, $stack);
 
-        $this->assertCount(3, $stack);
+        $this->assertCount(3, $route->getLegs());
+        $this->assertEquals($bpass1, $route->getStart());
+        $this->assertEquals($bpass3, $route->getEnd());
     }
 }

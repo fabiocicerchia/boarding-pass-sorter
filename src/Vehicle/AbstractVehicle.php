@@ -2,6 +2,10 @@
 
 namespace BoardingPassSorter\Vehicle;
 
+/**
+ * Class AbstractVehicle
+ * @package BoardingPassSorter\Vehicle
+ */
 abstract class AbstractVehicle
 {
     /**
@@ -10,7 +14,7 @@ abstract class AbstractVehicle
     protected $identifier;
 
     /**
-     * @param string $identifier
+     * @param string $identifier The vehicle identification number
      */
     public function __construct($identifier)
     {
