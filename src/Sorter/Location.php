@@ -2,6 +2,8 @@
 
 namespace BoardingPassSorter\Sorter;
 
+use BoardingPassSorter\Stack;
+
 /**
  * Class Location
  * @package BoardingPassSorter\Sorter
@@ -12,18 +14,14 @@ class Location implements SorterInterface
      * O(n)
      * @param array $sort The stack to be sorted
      */
-    public function sort(array $stack, $sorted = [])
+    public function sort(Stack $stack, $sorted = [])
     {
-        if (count($stack) === 1) {
-            return $stack;
-        }
-
         // Push a value to be used as initial reference
         if (empty($sorted)) {
-            array_push($sorted, array_shift($stack));
+            array_push($sorted, $stack->shift());
         }
 
-        $unmatched = [];
+        $unmatched = new Stack;
 
         foreach($stack as $item) {
             $source      = reset($sorted)->getOrigin()->getCity();
@@ -41,12 +39,14 @@ class Location implements SorterInterface
                 }
             } else {
                 // If it's not either a destination or an origin, push it into the unmatched to be re-checked later on
-                array_push($unmatched, $item);
+                $unmatched->push($item);
             }
         }
 
+        
+
         // Retry the unmatched items
-        if (!empty($unmatched)) {
+        if ($unmatched->count() > 0) {
             return $this->sort($unmatched, $sorted);
         }
 

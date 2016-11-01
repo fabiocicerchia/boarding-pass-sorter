@@ -18,7 +18,7 @@ class Route
      */
     public function __construct(SorterInterface $sorter, Stack $boardingPasses)
     {
-        $this->legs = $sorter->sort($boardingPasses->getAll());
+        $this->legs = $sorter->sort($boardingPasses);
     }
 
     /**

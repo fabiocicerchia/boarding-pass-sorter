@@ -8,45 +8,26 @@ use BoardingPassSorter\Pass\PassInterface;
  * Class Stack
  * @package BoardingPassSorter
  */
-class Stack implements \Countable
+class Stack extends \SplStack
 {
-    /**
-     * @var PassInterface[]
-     */
-    protected $stack = [];
 
     /**
      * @param array $details A list of boarding pass
      */
     public function __construct(array $boardingPasses = [])
     {
-        $this->stack = $boardingPasses;
+        foreach ($boardingPasses as $pass) {
+            $this->push($pass);
+        }
     }
 
     /**
      * @param PassInterface $boardingPass The pass to be added
      */
-    public function add(PassInterface $boardingPass)
+    public function push(PassInterface $boardingPass)
     {
-        array_push($this->stack, $boardingPass);
+        parent::push($boardingPass);
 
         return $this;
-    }
-
-    /**
-     * @return PassInterface[]
-     */
-    public function getAll()
-    {
-        return $this->stack;
-    }
-
-    // COUNTABLE INTERFACE METHODS
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->stack);
     }
 }

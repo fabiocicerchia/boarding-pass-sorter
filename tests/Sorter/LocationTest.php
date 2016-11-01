@@ -6,6 +6,7 @@ use BoardingPassSorter\Event\Departure;
 use BoardingPassSorter\Event\Arrival;
 use BoardingPassSorter\Vehicle\Train;
 use BoardingPassSorter\Pass;
+use BoardingPassSorter\Stack;
 use \Mockery as m;
 
 class LocationTest extends \PHPUnit_Framework_TestCase
@@ -35,7 +36,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         shuffle($list);
 
         $sorter = new Location;
-        $sortedStack = $sorter->sort($list);
+        $sortedStack = $sorter->sort(new Stack($list));
 
         // there shouldn't really need to check if it's sorted
         $this->assertCount(1, $sortedStack);
@@ -50,7 +51,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         shuffle($list);
 
         $sorter = new Location;
-        $sortedStack = $sorter->sort($list);
+        $sortedStack = $sorter->sort(new Stack($list));
 
         $this->assertCount(2, $sortedStack);
         $this->assertEquals($bpass1, $sortedStack[0]);
@@ -67,7 +68,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         shuffle($list);
 
         $sorter = new Location;
-        $sortedStack = $sorter->sort($list);
+        $sortedStack = $sorter->sort(new Stack($list));
 
         $this->assertCount(3, $sortedStack);
         $this->assertEquals($bpass1, $sortedStack[0]);
@@ -86,7 +87,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         shuffle($list);
 
         $sorter = new Location;
-        $sortedStack = $sorter->sort($list);
+        $sortedStack = $sorter->sort(new Stack($list));
 
         $this->assertCount(4, $sortedStack);
         $this->assertEquals($bpass1, $sortedStack[0]);
@@ -105,7 +106,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $list = [$bpass4, $bpass2, $bpass1, $bpass3];
 
         $sorter = new Location;
-        $sortedStack = $sorter->sort($list);
+        $sortedStack = $sorter->sort(new Stack($list));
 
         $this->assertCount(4, $sortedStack);
         $this->assertEquals($bpass1, $sortedStack[0]);
@@ -130,7 +131,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $list = [$bpass4, $bpass2, $bpass1, $bpass3, $bpass5, $bpass6, $bpass7, $bpass8, $bpass9, $bpass10];
 
         $sorter = new Location;
-        $sortedStack = $sorter->sort($list);
+        $sortedStack = $sorter->sort(new Stack($list));
 
         $this->assertCount(10, $sortedStack);
         $this->assertEquals($bpass1, $sortedStack[0]);

@@ -37,7 +37,7 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $bpass = new Pass($origin, $destination, $train);
 
         $stack = new Stack();
-        $stack->add($bpass);
+        $stack->push($bpass);
 
         $this->assertCount(1, $stack);
     }
@@ -51,9 +51,10 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $bpass = new Pass($origin, $destination, $train);
 
         $stack = new Stack();
-        $stack->add($bpass);
+        $stack->push($bpass);
 
         $this->assertCount(1, $stack);
-        $this->assertSame([$bpass], $stack->getAll());
+        $stack->rewind();
+        $this->assertEquals($bpass, $stack->current());
     }
 }
