@@ -1,16 +1,14 @@
 <?php
 
-namespace BoardingPassSorter;
+namespace BoardingPassSorter\Pass;
 
-use BoardingPassSorter\Pass\PassInterface;
+
 
 /**
- * Class Stack
- * @package BoardingPassSorter
+ * Class Stack.
  */
 class Stack extends \SplStack
 {
-
     /**
      * @param array $details A list of boarding pass
      */
@@ -24,8 +22,12 @@ class Stack extends \SplStack
     /**
      * @param PassInterface $boardingPass The pass to be added
      */
-    public function push(PassInterface $boardingPass)
+    public function push($boardingPass) : Stack
     {
+        if (!$boardingPass instanceof PassInterface) {
+            throw new \InvalidArgumentException('The parameter $boardingPass must be an instance of PassInterface');
+        }
+
         parent::push($boardingPass);
 
         return $this;

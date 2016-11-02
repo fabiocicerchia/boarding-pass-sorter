@@ -3,15 +3,14 @@
 namespace BoardingPassSorter\Vehicle;
 
 /**
- * Class Train
- * @package BoardingPassSorter\Vehicle
+ * Class Train.
  */
 class Train extends AbstractVehicle
 {
     /**
      * @return string
      */
-    public function getVehicleName()
+    public function getVehicleName() : string
     {
         return 'train';
     }

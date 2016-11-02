@@ -2,10 +2,17 @@
 
 namespace BoardingPassSorter;
 
-use BoardingPassSorter\Event\Departure;
-use BoardingPassSorter\Event\Arrival;
+use BoardingPassSorter\Point\Departure;
+use BoardingPassSorter\Point\Arrival;
 use BoardingPassSorter\Vehicle\Train;
 use BoardingPassSorter\Pass;
+use BoardingPassSorter\Pass\Stack;
+use ValueObjects\DateTime\DateTime;
+use ValueObjects\Geography\Address;
+use ValueObjects\Geography\Street;
+use ValueObjects\Geography\Country;
+use ValueObjects\Geography\CountryCode;
+use ValueObjects\StringLiteral\StringLiteral;
 use \Mockery as m;
 
 class RouteTest extends \PHPUnit_Framework_TestCase
@@ -16,12 +23,25 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     {
         $this->faker = \Faker\Factory::create();
     }
+    
+    protected function getRandomAddress()
+    {
+        return new Address(
+            new StringLiteral($this->faker->city),
+            new Street(new StringLiteral($this->faker->streetName), new StringLiteral($this->faker->buildingNumber)),
+            new StringLiteral($this->faker->state),
+            new StringLiteral($this->faker->city),
+            new StringLiteral($this->faker->stateAbbr),
+            new StringLiteral($this->faker->postcode),
+            new Country(CountryCode::IT())
+        );
+    }
 
     protected function getRandomBoardingPass()
     {
-        $origin      = new Departure($this->faker->city, $this->faker->dateTime(), $this->faker->dateTime(), $this->faker->lexify('Gate ?'));
-        $destination = new Arrival($this->faker->city, $this->faker->dateTime(), $this->faker->lexify('Gate ?'));
-        $train       = new Train($this->faker->bothify('??###'));
+        $origin      = new Departure($this->getRandomAddress(), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 15:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 10:00:00')), new StringLiteral($this->faker->lexify('Gate ?')));
+        $destination = new Arrival($this->getRandomAddress(), DateTime::fromNativeDateTime(new \DateTime('2016-02-01')), new StringLiteral($this->faker->lexify('Gate ?')));
+        $train       = new Train(new StringLiteral($this->faker->bothify('??###')));
 
         $bpass = new Pass($origin, $destination, $train);
 
@@ -32,10 +52,12 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     {
         $bpass = $this->getRandomBoardingPass();
 
-        $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
-        $sorter->shouldReceive('sort')->times(1)->andReturn([$bpass]);
+        $stack = new Stack();
+        $stack->push($bpass);
 
-        $stack = new Stack([$bpass]);
+        $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
+        $sorter->shouldReceive('sort')->times(1)->andReturn($stack);
+        
         $route = new Route($sorter, $stack);
 
         $this->assertCount(1, $route->getLegs());
@@ -46,10 +68,13 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $bpass1 = $this->getRandomBoardingPass();
         $bpass2 = $this->getRandomBoardingPass();
 
-        $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
-        $sorter->shouldReceive('sort')->times(1)->andReturn([$bpass1, $bpass2]);
+        $stack = new Stack();
+        $stack->push($bpass1);
+        $stack->push($bpass2);
 
-        $stack = new Stack([$bpass1, $bpass2]);
+        $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
+        $sorter->shouldReceive('sort')->times(1)->andReturn($stack);
+        
         $route = new Route($sorter, $stack);
 
         $this->assertCount(2, $route->getLegs());
@@ -63,10 +88,14 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $bpass2 = $this->getRandomBoardingPass();
         $bpass3 = $this->getRandomBoardingPass();
 
-        $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
-        $sorter->shouldReceive('sort')->times(1)->andReturn([$bpass1, $bpass2, $bpass3]);
+        $stack = new Stack();
+        $stack->push($bpass1);
+        $stack->push($bpass2);
+        $stack->push($bpass3);
 
-        $stack = new Stack([$bpass1, $bpass2, $bpass3]);
+        $sorter = m::mock('BoardingPassSorter\\Sorter\\SorterInterface[sort]');
+        $sorter->shouldReceive('sort')->times(1)->andReturn($stack);
+        
         $route = new Route($sorter, $stack);
 
         $this->assertCount(3, $route->getLegs());

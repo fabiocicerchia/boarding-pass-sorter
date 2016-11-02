@@ -2,13 +2,12 @@
 
 namespace BoardingPassSorter\Sorter;
 
-use BoardingPassSorter\Stack;
+use BoardingPassSorter\Pass\Stack;
 
 /**
- * Interface SorterInterface
- * @package BoardingPassSorter\Sorter
+ * Interface SorterInterface.
  */
 interface SorterInterface
 {
-    public function sort(Stack $stack);
+    public function sort(Stack $stack, Stack $sortedStack = null) : Stack;
 }

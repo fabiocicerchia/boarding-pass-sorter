@@ -2,54 +2,49 @@
 
 namespace BoardingPassSorter\Sorter;
 
-use BoardingPassSorter\Stack;
+use BoardingPassSorter\Pass\Stack;
 
 /**
- * Class Location
- * @package BoardingPassSorter\Sorter
+ * Class Location.
  */
 class Location implements SorterInterface
 {
     /**
-     * O(n)
      * @param array $sort The stack to be sorted
+     *
+     * @return Stack
      */
-    public function sort(Stack $stack, $sorted = [])
+    public function sort(Stack $stack, Stack $sortedStack = null) : Stack
     {
         // Push a value to be used as initial reference
-        if (empty($sorted)) {
-            array_push($sorted, $stack->shift());
+        if ($sortedStack === null) {
+            $sortedStack = new Stack();
+            $sortedStack->push($stack->shift());
         }
 
-        $unmatched = new Stack;
+        $unmatched = new Stack();
 
-        foreach($stack as $item) {
-            $source      = reset($sorted)->getOrigin()->getCity();
-            $destination = end($sorted)->getDestination()->getCity();
+        foreach ($stack as $item) {
+            $source      = $sortedStack->bottom()->getOrigin()->getCity();
+            $destination = $sortedStack->top()->getDestination()->getCity();
 
-            if ($item->getOrigin()->getCity() === $destination || $item->getDestination()->getCity() === $source) {
+            if ($item->getOrigin()->getCity() === $destination) {
                 // Append it if it's a future journey
-                if ($item->getOrigin()->getCity() === $destination) {
-                    array_push($sorted, $item);
-                }
-
+                $sortedStack->push($item);
+            } elseif ($item->getDestination()->getCity() === $source) {
                 // Prepend it if it's a past journey
-                if ($item->getDestination()->getCity() === $source) {
-                    array_unshift($sorted, $item);
-                }
+                $sortedStack->unshift($item);
             } else {
                 // If it's not either a destination or an origin, push it into the unmatched to be re-checked later on
                 $unmatched->push($item);
             }
         }
 
-        
-
         // Retry the unmatched items
         if ($unmatched->count() > 0) {
-            return $this->sort($unmatched, $sorted);
+            return $this->sort($unmatched, $sortedStack);
         }
 
-        return $sorted;
+        return $sortedStack;
     }
 }

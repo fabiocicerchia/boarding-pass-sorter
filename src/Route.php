@@ -2,19 +2,22 @@
 
 namespace BoardingPassSorter;
 
-use BoardingPassSorter\Stack;
+use BoardingPassSorter\Pass\Stack;
 use BoardingPassSorter\Sorter\SorterInterface;
 
 /**
- * Class Route
- * @package BoardingPassSorter
+ * Class Route.
  */
 class Route
 {
+    /**
+     * @var Stack
+     */
     protected $legs;
 
     /**
-     * @param array $details A list of boarding pass
+     * @param SorterInterface $sorter         The sorting algorithm
+     * @param Stack           $boardingPasses A list of boarding pass
      */
     public function __construct(SorterInterface $sorter, Stack $boardingPasses)
     {
@@ -22,9 +25,9 @@ class Route
     }
 
     /**
-     * @return array
+     * @return Stack
      */
-    public function getLegs()
+    public function getLegs() : Stack
     {
         return $this->legs;
     }
@@ -32,16 +35,16 @@ class Route
     /**
      * @return BoardingPassSorter\Pass
      */
-    public function getStart()
+    public function getStart() : Pass
     {
-        return reset($this->legs);
+        return $this->legs->bottom();
     }
 
     /**
      * @return BoardingPassSorter\Pass
      */
-    public function getEnd()
+    public function getEnd() : Pass
     {
-        return end($this->legs);
+        return $this->legs->top();
     }
 }

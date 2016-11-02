@@ -2,14 +2,15 @@
 
 namespace BoardingPassSorter;
 
-use BoardingPassSorter\Event\Arrival;
-use BoardingPassSorter\Event\Departure;
+use BoardingPassSorter\Point\Arrival;
+use BoardingPassSorter\Point\Departure;
 use BoardingPassSorter\Pass\PassInterface;
-use BoardingPassSorter\Vehicle\AbstractVehicle;
+use BoardingPassSorter\Vehicle\VehicleInterface;
+use ValueObjects\StringLiteral\StringLiteral;
+use ValueObjects\Structure\Collection;
 
 /**
- * Class Pass
- * @package BoardingPassSorter
+ * Class Pass.
  */
 class Pass implements PassInterface
 {
@@ -24,29 +25,33 @@ class Pass implements PassInterface
     protected $destination;
 
     /**
-     * @var AbstractVehicle
+     * @var VehicleInterface
      */
     protected $vehicle;
 
     /**
-     * @return string
+     * @return StringLiteral
      */
     protected $seat;
 
     /**
-     * @return array
+     * @return Collection
      */
     protected $details;
 
     /**
-     * @param Departure       $origin      The journey origin place
-     * @param Arrival         $destination The journey destination place
-     * @param AbstractVehicle $vehicle     The vehicle used to travel
-     * @param string          $seat        The reserved seat number
-     * @param array           $details     The journey details
+     * @param Departure        $origin      The journey origin place
+     * @param Arrival          $destination The journey destination place
+     * @param VehicleInterface $vehicle     The vehicle used to travel
+     * @param StringLiteral    $seat        The reserved seat number
+     * @param Collection       $details     The journey details
      */
-    public function __construct(Departure $origin, Arrival $destination, AbstractVehicle $vehicle, $seat = null, array $details = [])
+    public function __construct(Departure $origin, Arrival $destination, VehicleInterface $vehicle, StringLiteral $seat = null, Collection $details = null)
     {
+        if ($origin->getTime()->toNativeDateTime() > $destination->getTime()->toNativeDateTime()) {
+            throw new \InvalidArgumentException('The departure date cannot be after the arrival date');
+        }
+        
         $this->origin      = $origin;
         $this->destination = $destination;
         $this->vehicle     = $vehicle;
@@ -57,7 +62,7 @@ class Pass implements PassInterface
     /**
      * @return Departure
      */
-    public function getOrigin()
+    public function getOrigin() : Departure
     {
         return $this->origin;
     }
@@ -65,23 +70,23 @@ class Pass implements PassInterface
     /**
      * @return Arrival
      */
-    public function getDestination()
+    public function getDestination() : Arrival
     {
         return $this->destination;
     }
 
     /**
-     * @return string
+     * @return StringLiteral
      */
-    public function getSeat()
+    public function getSeat() : StringLiteral
     {
         return $this->seat;
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getDetails()
+    public function getDetails() : Collection
     {
         return $this->details;
     }

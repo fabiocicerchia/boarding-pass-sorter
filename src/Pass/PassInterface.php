@@ -2,29 +2,33 @@
 
 namespace BoardingPassSorter\Pass;
 
+use BoardingPassSorter\Point\Arrival;
+use BoardingPassSorter\Point\Departure;
+use ValueObjects\StringLiteral\StringLiteral;
+use ValueObjects\Structure\Collection;
+
 /**
- * Interface PassInterface
- * @package BoardingPassSorter\Pass
+ * Interface PassInterface.
  */
 interface PassInterface
 {
     /**
      * @return Departure
      */
-    public function getOrigin();
+    public function getOrigin() : Departure;
 
     /**
      * @return Arrival
      */
-    public function getDestination();
+    public function getDestination() : Arrival;
 
     /**
-     * @return string
+     * @return StringLiteral
      */
-    public function getSeat();
+    public function getSeat() : StringLiteral;
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getDetails();
+    public function getDetails() : Collection;
 }

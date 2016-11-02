@@ -2,29 +2,30 @@
 
 namespace BoardingPassSorter\Vehicle;
 
+use ValueObjects\StringLiteral\StringLiteral;
+
 /**
- * Class AbstractVehicle
- * @package BoardingPassSorter\Vehicle
+ * Class AbstractVehicle.
  */
-abstract class AbstractVehicle
+abstract class AbstractVehicle implements VehicleInterface
 {
     /**
-     * @var string
+     * @var StringLiteral
      */
     protected $identifier;
 
     /**
-     * @param string $identifier The vehicle identification number
+     * @param StringLiteral $identifier The vehicle identification number
      */
-    public function __construct($identifier)
+    public function __construct(StringLiteral $identifier)
     {
         $this->identifier = $identifier;
     }
 
     /**
-     * @return string
+     * @return StringLiteral
      */
-    public function getIdentifier()
+    public function getIdentifier() : StringLiteral
     {
         return $this->identifier;
     }
