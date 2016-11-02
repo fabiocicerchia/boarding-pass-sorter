@@ -5,7 +5,6 @@ namespace BoardingPassSorter\Pass;
 use BoardingPassSorter\Point\Arrival;
 use BoardingPassSorter\Point\Departure;
 use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Structure\Collection;
 
 /**
  * Interface PassInterface.
@@ -28,7 +27,7 @@ interface PassInterface
     public function getSeat() : StringLiteral;
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getDetails() : Collection;
+    public function getDetails() : array;
 }

@@ -2,8 +2,8 @@
 
 namespace BoardingPassSorter\Point;
 
-use ValueObjects\Geography\Address;
 use ValueObjects\DateTime\DateTime;
+use ValueObjects\Geography\Address;
 use ValueObjects\StringLiteral\StringLiteral;
 
 /**

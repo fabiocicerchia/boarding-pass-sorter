@@ -7,11 +7,8 @@ namespace BoardingPassSorter\Vehicle;
  */
 class Train extends AbstractVehicle
 {
-    /**
-     * @return string
-     */
-    public function getVehicleName() : string
+    public function __toString() : string
     {
-        return 'train';
+        return 'il treno';
     }
 }

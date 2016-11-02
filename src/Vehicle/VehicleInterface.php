@@ -9,6 +9,7 @@ use ValueObjects\StringLiteral\StringLiteral;
  */
 interface VehicleInterface
 {
+    public function hasIdentifier() : bool;
     public function getIdentifier() : StringLiteral;
-    public function getVehicleName() : string;
+    public function __toString() : string;
 }

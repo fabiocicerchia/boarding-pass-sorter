@@ -7,11 +7,8 @@ namespace BoardingPassSorter\Vehicle;
  */
 class Airplane extends AbstractVehicle
 {
-    /**
-     * @return string
-     */
-    public function getVehicleName() : string
+    public function __toString() : string
     {
-        return 'airplane';
+        return 'il volo';
     }
 }

@@ -17,9 +17,17 @@ abstract class AbstractVehicle implements VehicleInterface
     /**
      * @param StringLiteral $identifier The vehicle identification number
      */
-    public function __construct(StringLiteral $identifier)
+    public function __construct(StringLiteral $identifier = null)
     {
         $this->identifier = $identifier;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasIdentifier() : bool
+    {
+        return $this->identifier !== null;
     }
 
     /**

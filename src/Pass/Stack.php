@@ -2,8 +2,6 @@
 
 namespace BoardingPassSorter\Pass;
 
-
-
 /**
  * Class Stack.
  */

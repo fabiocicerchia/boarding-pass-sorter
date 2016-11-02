@@ -124,9 +124,9 @@ class PassTest extends \PHPUnit_Framework_TestCase
             $destination,
             $bus,
             new StringLiteral('I6'),
-            new Collection(\SplFixedArray::fromArray([
-                new KeyValuePair(new StringLiteral('note'), new StringLiteral('Possible strike on departure date'))
-            ]))
+            [
+                'note' => 'Possible strike on departure date'
+            ]
         );
 
         $this->assertEquals('Point A', $bpass->getOrigin()->getCity());
@@ -136,6 +136,6 @@ class PassTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('2016-01-02', $bpass->getDestination()->getTime()->toNativeDateTime()->format('Y-m-d'));
 
         $this->assertEquals('I6', $bpass->getSeat());
-        $this->assertSame(1, $bpass->getDetails()->count()->toNative());
+        $this->assertCount(1, $bpass->getDetails());
     }
 }

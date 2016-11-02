@@ -28,10 +28,10 @@ class Location implements SorterInterface
             $source      = $sortedStack->bottom()->getOrigin()->getCity();
             $destination = $sortedStack->top()->getDestination()->getCity();
 
-            if ($item->getOrigin()->getCity() === $destination) {
+            if ($item->getOrigin()->getCity() == $destination) {
                 // Append it if it's a future journey
                 $sortedStack->push($item);
-            } elseif ($item->getDestination()->getCity() === $source) {
+            } elseif ($item->getDestination()->getCity() == $source) {
                 // Prepend it if it's a past journey
                 $sortedStack->unshift($item);
             } else {

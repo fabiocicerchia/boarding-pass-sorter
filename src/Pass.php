@@ -2,12 +2,11 @@
 
 namespace BoardingPassSorter;
 
+use BoardingPassSorter\Pass\PassInterface;
 use BoardingPassSorter\Point\Arrival;
 use BoardingPassSorter\Point\Departure;
-use BoardingPassSorter\Pass\PassInterface;
 use BoardingPassSorter\Vehicle\VehicleInterface;
 use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Structure\Collection;
 
 /**
  * Class Pass.
@@ -35,7 +34,7 @@ class Pass implements PassInterface
     protected $seat;
 
     /**
-     * @return Collection
+     * @return array
      */
     protected $details;
 
@@ -44,9 +43,9 @@ class Pass implements PassInterface
      * @param Arrival          $destination The journey destination place
      * @param VehicleInterface $vehicle     The vehicle used to travel
      * @param StringLiteral    $seat        The reserved seat number
-     * @param Collection       $details     The journey details
+     * @param array            $details     The journey details
      */
-    public function __construct(Departure $origin, Arrival $destination, VehicleInterface $vehicle, StringLiteral $seat = null, Collection $details = null)
+    public function __construct(Departure $origin, Arrival $destination, VehicleInterface $vehicle, StringLiteral $seat = null, array $details = [])
     {
         if ($origin->getTime()->toNativeDateTime() > $destination->getTime()->toNativeDateTime()) {
             throw new \InvalidArgumentException('The departure date cannot be after the arrival date');
@@ -76,6 +75,22 @@ class Pass implements PassInterface
     }
 
     /**
+     * @return VehicleInterface
+     */
+    public function getVehicle() : VehicleInterface
+    {
+        return $this->vehicle;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSeat() : bool
+    {
+        return $this->seat !== null;
+    }
+
+    /**
      * @return StringLiteral
      */
     public function getSeat() : StringLiteral
@@ -84,9 +99,9 @@ class Pass implements PassInterface
     }
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getDetails() : Collection
+    public function getDetails() : array
     {
         return $this->details;
     }

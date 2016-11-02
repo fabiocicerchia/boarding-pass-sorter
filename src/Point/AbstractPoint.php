@@ -2,8 +2,8 @@
 
 namespace BoardingPassSorter\Point;
 
-use ValueObjects\Geography\Address;
 use ValueObjects\DateTime\DateTime;
+use ValueObjects\Geography\Address;
 use ValueObjects\StringLiteral\StringLiteral;
 
 /**
@@ -62,5 +62,13 @@ abstract class AbstractPoint implements PointInterface
     public function getLocation() : StringLiteral
     {
         return $this->location;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() : string
+    {
+        return $this->getCity();
     }
 }
