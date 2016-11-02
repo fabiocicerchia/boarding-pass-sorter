@@ -43,9 +43,18 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     protected function getRandomBoardingPass()
     {
-        $origin      = new Departure($this->getRandomAddress(), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 15:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 10:00:00')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $destination = new Arrival($this->getRandomAddress(), DateTime::fromNativeDateTime(new \DateTime('2016-02-01')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $train       = new Train(new StringLiteral($this->faker->bothify('??###')));
+        $origin = new Departure(
+            $this->getRandomAddress(),
+            DateTime::fromNative(2016, 'January', 1, 15, 0, 0),
+            DateTime::fromNative(2016, 'January', 1, 10, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $destination = new Arrival(
+            $this->getRandomAddress(),
+            DateTime::fromNative(2016, 'February', 1, 10, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $train = new Train(new StringLiteral($this->faker->bothify('??###')));
 
         $bpass = new Pass($origin, $destination, $train);
 
@@ -130,8 +139,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase
             new StringLiteral('00185'),
             new Country(CountryCode::IT())
         );
-        $origin      = new Departure($milanoCentrale, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 15:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 14:30:00')), new StringLiteral($this->faker->lexify('Binario 1')));
-        $destination = new Arrival($romaTermini, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 18:30:00')), new StringLiteral($this->faker->lexify('Binario 1')));
+        $origin      = new Departure($milanoCentrale, DateTime::fromNative(2016, 'January', 1, 15, 0, 0), DateTime::fromNative(2016, 'January', 1, 14, 30, 0), new StringLiteral($this->faker->lexify('Binario 1')));
+        $destination = new Arrival($romaTermini, DateTime::fromNative(2016, 'January', 1, 18, 30, 0), new StringLiteral($this->faker->lexify('Binario 1')));
         $vehicle     = new Train(new StringLiteral('78A'));
         $bpass[]     = new Pass($origin, $destination, $vehicle, new StringLiteral('45B'));
 
@@ -145,8 +154,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase
             new StringLiteral('00054'),
             new Country(CountryCode::IT())
         );
-        $origin      = new Departure($romaTermini, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 19:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 18:45:00')), new StringLiteral($this->faker->lexify('Piattaforma 1')));
-        $destination = new Arrival($romaFiumicino, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 20:00:00')), new StringLiteral($this->faker->lexify('Piattaforma 1')));
+        $origin      = new Departure($romaTermini, DateTime::fromNative(2016, 'January', 1, 19, 0, 0), DateTime::fromNative(2016, 'January', 1, 18, 45, 0), new StringLiteral($this->faker->lexify('Piattaforma 1')));
+        $destination = new Arrival($romaFiumicino,DateTime::fromNative(2016, 'January', 1, 20, 0, 0), new StringLiteral($this->faker->lexify('Piattaforma 1')));
         $vehicle     = new Bus();
         $bpass[]     = new Pass($origin, $destination, $vehicle);
 
@@ -169,8 +178,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase
             new StringLiteral('95700'),
             new Country(CountryCode::FR())
         );
-        $origin      = new Departure($romaFiumicino, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 22:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 21:30:00')), new StringLiteral($this->faker->lexify('45B')));
-        $destination = new Arrival($parigi, DateTime::fromNativeDateTime(new \DateTime('2016-01-02 00:10:00')), new StringLiteral($this->faker->lexify('Gate 10')));
+        $origin      = new Departure($romaFiumicino, DateTime::fromNative(2016, 'January', 1, 22, 0, 0), DateTime::fromNative(2016, 'January', 1, 21, 30, 0), new StringLiteral($this->faker->lexify('45B')));
+        $destination = new Arrival($parigi, DateTime::fromNative(2016, 'January', 2, 0, 10, 0), new StringLiteral($this->faker->lexify('Gate 10')));
         $vehicle     = new Airplane(new StringLiteral('SK455'));
         $details     = ['luggage' => 'Consegna bagaglio alla biglietteria 344'];
         $bpass[]     = new Pass($origin, $destination, $vehicle, new StringLiteral('3A'), $details);
@@ -185,8 +194,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase
             new StringLiteral('11430'),
             new Country(CountryCode::US())
         );
-        $origin      = new Departure($parigi, DateTime::fromNativeDateTime(new \DateTime('2016-01-02 10:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-02 09:30:00')), new StringLiteral($this->faker->lexify('22')));
-        $destination = new Arrival($newYork, DateTime::fromNativeDateTime(new \DateTime('2016-01-02 18:30:00')), new StringLiteral($this->faker->lexify('Gate 5')));
+        $origin      = new Departure($parigi, DateTime::fromNative(2016, 'January', 2, 10, 0, 0), DateTime::fromNative(2016, 'January', 2, 9, 30, 0), new StringLiteral($this->faker->lexify('22')));
+        $destination = new Arrival($newYork, DateTime::fromNative(2016, 'January', 2, 18, 30, 0), new StringLiteral($this->faker->lexify('Gate 5')));
         $vehicle     = new Airplane(new StringLiteral('SK22'));
         $details     = ['luggage' => 'Bagaglio trasferito automaticamente dall\'ultima tratta'];
         $bpass[]     = new Pass($origin, $destination, $vehicle, new StringLiteral('7B'), $details);

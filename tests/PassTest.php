@@ -42,14 +42,14 @@ class PassTest extends \PHPUnit_Framework_TestCase
     {
         $origin = new Departure(
             $this->getRandomAddress('Point A'),
-            DateTime::fromNativeDateTime(new \DateTime('2016-01-01 13:00:00')), // departure
-            DateTime::fromNativeDateTime(new \DateTime('2016-01-01 12:40:00')), // boarding
+            DateTime::fromNative(2016, 'January', 1, 13, 0, 0), // departure
+            DateTime::fromNative(2016, 'January', 1, 12, 40, 0), // boarding
             new StringLiteral('Gate A') // location
         );
         $destination = new Arrival(
             $this->getRandomAddress('Point B'),
-            DateTime::fromNativeDateTime(new \DateTime('2016-01-02 10:00:00')), // arrival
-            new StringLiteral('Gate F') // location);
+            DateTime::fromNative(2016, 'January', 2, 10, 0, 0), // arrival
+            new StringLiteral('Gate F') // location
         );
 
         $train = new Train(new StringLiteral($this->faker->bothify('??###')));
@@ -74,14 +74,14 @@ class PassTest extends \PHPUnit_Framework_TestCase
     {
         $origin = new Departure(
             $this->getRandomAddress('Point A'),
-            DateTime::fromNativeDateTime(new \DateTime('2016-01-01 13:00:00')), // departure
-            DateTime::fromNativeDateTime(new \DateTime('2016-01-01 12:40:00')), // boarding
+            DateTime::fromNative(2016, 'January', 1, 13, 0, 0), // departure
+            DateTime::fromNative(2016, 'January', 1, 12, 40, 0), // boarding
             new StringLiteral('Gate A') // location
         );
         $destination = new Arrival(
             $this->getRandomAddress('Point B'),
-            DateTime::fromNativeDateTime(new \DateTime('2015-12-31 10:00:00')), // arrival
-            new StringLiteral('Gate F') // location);
+            DateTime::fromNative(2015, 'December', 31, 10, 0, 0), // arrival
+            new StringLiteral('Gate F') // location
         );
 
         $train = new Train(new StringLiteral($this->faker->bothify('??###')));
@@ -91,8 +91,14 @@ class PassTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateBoardingPassWithSeat()
     {
-        $origin      = new Departure($this->getRandomAddress('Point A'), DateTime::fromNativeDateTime(new \DateTime('2016-01-01')));
-        $destination = new Arrival($this->getRandomAddress('Point B'), DateTime::fromNativeDateTime(new \DateTime('2016-01-02')));
+        $origin = new Departure(
+            $this->getRandomAddress('Point A'),
+            DateTime::fromNative(2016, 'January', 1, 13, 0, 0) // departure
+        );
+        $destination = new Arrival(
+            $this->getRandomAddress('Point B'),
+            DateTime::fromNative(2016, 'January', 2, 10, 0, 0) // arrival
+        );
 
         $airplane = new Airplane(new StringLiteral($this->faker->bothify('??###')));
 
@@ -114,8 +120,14 @@ class PassTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateBoardingPassWithSeatAndDetails()
     {
-        $origin      = new Departure($this->getRandomAddress('Point A'), DateTime::fromNativeDateTime(new \DateTime('2016-01-01')));
-        $destination = new Arrival($this->getRandomAddress('Point B'), DateTime::fromNativeDateTime(new \DateTime('2016-01-02')));
+        $origin = new Departure(
+            $this->getRandomAddress('Point A'),
+            DateTime::fromNative(2016, 'January', 1, 13, 0, 0) // departure
+        );
+        $destination = new Arrival(
+            $this->getRandomAddress('Point B'),
+            DateTime::fromNative(2016, 'January', 2, 10, 0, 0) // arrival
+        );
 
         $bus = new Bus(new StringLiteral($this->faker->bothify('###')));
 

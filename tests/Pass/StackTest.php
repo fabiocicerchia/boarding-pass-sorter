@@ -41,9 +41,18 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $departureAddress = $this->getRandomAddress();
         $arrivalAddress   = $this->getRandomAddress();
         
-        $origin      = new Departure($departureAddress, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 15:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 10:00:00')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $destination = new Arrival($arrivalAddress, DateTime::fromNativeDateTime(new \DateTime('2016-02-01')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $train       = new Train(new StringLiteral($this->faker->bothify('??###')));
+        $origin = new Departure(
+            $departureAddress,
+            DateTime::fromNative(2016, 'January', 1, 15, 0, 0),
+            DateTime::fromNative(2016, 'January', 1, 10, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $destination = new Arrival(
+            $arrivalAddress,
+            DateTime::fromNative(2016, 'February', 1, 0, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $train = new Train(new StringLiteral($this->faker->bothify('??###')));
 
         $bpass = new Pass($origin, $destination, $train);
 
@@ -57,9 +66,18 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $departureAddress = $this->getRandomAddress();
         $arrivalAddress   = $this->getRandomAddress();
         
-        $origin      = new Departure($departureAddress, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 15:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 10:00:00')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $destination = new Arrival($arrivalAddress, DateTime::fromNativeDateTime(new \DateTime('2016-02-01')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $train       = new Train(new StringLiteral($this->faker->bothify('??###')));
+        $origin = new Departure(
+            $departureAddress,
+            DateTime::fromNative(2016, 'January', 1, 15, 0, 0),
+            DateTime::fromNative(2016, 'January', 1, 10, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $destination = new Arrival(
+            $arrivalAddress,
+            DateTime::fromNative(2016, 'February', 1, 0, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $train = new Train(new StringLiteral($this->faker->bothify('??###')));
 
         $bpass = new Pass($origin, $destination, $train);
 
@@ -74,9 +92,18 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $departureAddress = $this->getRandomAddress();
         $arrivalAddress   = $this->getRandomAddress();
         
-        $origin      = new Departure($departureAddress, DateTime::fromNativeDateTime(new \DateTime('2016-01-01 15:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 10:00:00')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $destination = new Arrival($arrivalAddress, DateTime::fromNativeDateTime(new \DateTime('2016-02-01')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $train       = new Train(new StringLiteral($this->faker->bothify('??###')));
+        $origin = new Departure(
+            $departureAddress,
+            DateTime::fromNative(2016, 'January', 1, 15, 0, 0),
+            DateTime::fromNative(2016, 'January', 1, 10, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $destination = new Arrival(
+            $arrivalAddress,
+            DateTime::fromNative(2016, 'February', 1, 0, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $train = new Train(new StringLiteral($this->faker->bothify('??###')));
 
         $bpass = new Pass($origin, $destination, $train);
 

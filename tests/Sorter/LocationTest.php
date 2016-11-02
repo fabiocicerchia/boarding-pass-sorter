@@ -39,9 +39,18 @@ class LocationTest extends \PHPUnit_Framework_TestCase
 
     protected function getRandomBoardingPass($originCity, $destinationCity)
     {
-        $origin      = new Departure($this->getRandomAddress($originCity), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 15:00:00')), DateTime::fromNativeDateTime(new \DateTime('2016-01-01 10:00:00')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $destination = new Arrival($this->getRandomAddress($destinationCity), DateTime::fromNativeDateTime(new \DateTime('2016-02-01')), new StringLiteral($this->faker->lexify('Gate ?')));
-        $train       = new Train(new StringLiteral($this->faker->bothify('??###')));
+        $origin = new Departure(
+            $this->getRandomAddress($originCity),
+            DateTime::fromNative(2016, 'January', 1, 15, 0, 0),
+            DateTime::fromNative(2016, 'January', 1, 10, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $destination = new Arrival(
+            $this->getRandomAddress($destinationCity),
+            DateTime::fromNative(2016, 'February', 1, 0, 0, 0),
+            new StringLiteral($this->faker->lexify('Gate ?'))
+        );
+        $train = new Train(new StringLiteral($this->faker->bothify('??###')));
 
         $bpass = new Pass($origin, $destination, $train);
 
