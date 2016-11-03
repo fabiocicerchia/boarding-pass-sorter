@@ -2,7 +2,7 @@
 
 namespace BoardingPassSorter;
 
-use BoardingPassSorter\Describer\Pass as PassDescriber;
+use BoardingPassSorter\Pass as BoardingPass;
 use BoardingPassSorter\Pass\Stack;
 use BoardingPassSorter\Sorter\SorterInterface;
 
@@ -34,28 +34,18 @@ class Route
     }
 
     /**
-     * @return BoardingPassSorter\Pass
+     * @return BoardingPass
      */
-    public function getStart() : Pass
+    public function getStart() : BoardingPass
     {
         return $this->legs->bottom();
     }
 
     /**
-     * @return BoardingPassSorter\Pass
+     * @return BoardingPass
      */
-    public function getEnd() : Pass
+    public function getEnd() : BoardingPass
     {
         return $this->legs->top();
-    }
-
-    public function __toString() : string
-    {
-        $legs = [];
-        foreach ($this->legs as $leg) {
-            array_unshift($legs, new PassDescriber($leg));
-        }
-
-        return implode(PHP_EOL, $legs);
     }
 }

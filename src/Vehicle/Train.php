@@ -7,6 +7,9 @@ namespace BoardingPassSorter\Vehicle;
  */
 class Train extends AbstractVehicle
 {
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
         return 'il treno';

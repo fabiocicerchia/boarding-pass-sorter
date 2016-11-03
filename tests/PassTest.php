@@ -13,8 +13,6 @@ use ValueObjects\Geography\Street;
 use ValueObjects\Geography\Country;
 use ValueObjects\Geography\CountryCode;
 use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Structure\Collection;
-use ValueObjects\Structure\KeyValuePair;
 
 class PassTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +22,7 @@ class PassTest extends \PHPUnit_Framework_TestCase
     {
         $this->faker = \Faker\Factory::create();
     }
-    
+
     protected function getRandomAddress($name)
     {
         return new Address(
@@ -37,7 +35,7 @@ class PassTest extends \PHPUnit_Framework_TestCase
             new Country(CountryCode::IT())
         );
     }
-    
+
     public function testCreateSimpleBoardingPass()
     {
         $origin = new Departure(
@@ -65,7 +63,7 @@ class PassTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('2016-01-02', $bpass->getDestination()->getTime()->toNativeDateTime()->format('Y-m-d'));
         $this->assertEquals('Gate F', $bpass->getDestination()->getLocation());
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage The departure date cannot be after the arrival date
@@ -137,7 +135,7 @@ class PassTest extends \PHPUnit_Framework_TestCase
             $bus,
             new StringLiteral('I6'),
             [
-                'note' => 'Possible strike on departure date'
+                'note' => 'Possible strike on departure date',
             ]
         );
 

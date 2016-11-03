@@ -2,7 +2,8 @@
 
 namespace BoardingPassSorter\Describer;
 
-use BoardingPassSorter\Describer\Vehicle;
+use BoardingPassSorter\Describer\Vehicle as VehicleDescriber;
+use BoardingPassSorter\Pass as BoardingPass;
 use BoardingPassSorter\Vehicle\Airplane;
 
 /**
@@ -10,43 +11,66 @@ use BoardingPassSorter\Vehicle\Airplane;
  */
 class Pass
 {
-    protected $pass;
+    /**
+     * @var BoardingPass
+     */
+    protected $boardingPass;
 
-    public function __construct(\BoardingPassSorter\Pass $pass)
+    /**
+     * @param BoardingPass $boardingPass The pass to be described
+     */
+    public function __construct(BoardingPass $boardingPass)
     {
-        $this->pass = $pass;
+        $this->boardingPass = $boardingPass;
     }
 
+    /**
+     * Describe specifically a Flight Pass.
+     *
+     * @return string
+     */
     protected function describeFlight()
     {
+        $message = 'Dall\'aeroporto di %s, prendere il volo %s per %s. Imbarco %s, posto %s. %s.';
         return trim(sprintf(
-            'Dall\'aeroporto di %s, prendere il volo %s per %s. Imbarco %s, posto %s. %s.',
-            $this->pass->getOrigin(),
-            new Vehicle($this->pass->getVehicle()),
-            $this->pass->getDestination(),
-            $this->pass->getOrigin()->getLocation(),
-            $this->pass->getSeat(),
-            implode('. ', $this->pass->getDetails())
+            $message,
+            $this->boardingPass->getOrigin(),
+            new VehicleDescriber($this->boardingPass->getVehicle()),
+            $this->boardingPass->getDestination(),
+            $this->boardingPass->getOrigin()->getLocation(),
+            $this->boardingPass->getSeat(),
+            implode('. ', $this->boardingPass->getDetails())
         ));
     }
 
+    /**
+     * Describe generically any Pass.
+     *
+     * @return string
+     */
     protected function describeGeneric()
     {
-        $seat = ($this->pass->hasSeat() ? 'Posto assegnato ' . $this->pass->getSeat() : 'Nessuna assegnazione del posto');
+        $seat = $this->boardingPass->hasSeat()
+                ? 'Posto assegnato ' . $this->boardingPass->getSeat()
+                : 'Nessuna assegnazione del posto';
 
+        $message = '%s da %s a %s. %s. %s';
         return trim(sprintf(
-            '%s da %s a %s. %s. %s',
-            new Vehicle($this->pass->getVehicle()),
-            $this->pass->getOrigin(),
-            $this->pass->getDestination(),
+            $message,
+            new VehicleDescriber($this->boardingPass->getVehicle()),
+            $this->boardingPass->getOrigin(),
+            $this->boardingPass->getDestination(),
             $seat,
-            implode('. ', $this->pass->getDetails())
+            implode('. ', $this->boardingPass->getDetails())
         ));
     }
 
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
-        if ($this->pass->getVehicle() instanceof Airplane) {
+        if ($this->boardingPass->getVehicle() instanceof Airplane) {
             return $this->describeFlight();
         }
 

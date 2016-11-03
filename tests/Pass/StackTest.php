@@ -12,7 +12,6 @@ use ValueObjects\Geography\Street;
 use ValueObjects\Geography\Country;
 use ValueObjects\Geography\CountryCode;
 use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Structure\Collection;
 
 class StackTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +21,7 @@ class StackTest extends \PHPUnit_Framework_TestCase
     {
         $this->faker = \Faker\Factory::create();
     }
-    
+
     protected function getRandomAddress()
     {
         return new Address(
@@ -113,5 +112,15 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $stack);
         $stack->rewind();
         $this->assertEquals($bpass, $stack->current());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage The parameter $boardingPass must be an instance of PassInterface
+     */
+    public function testInvalidPush()
+    {
+        $stack = new Stack();
+        $stack->push(new \stdClass);
     }
 }

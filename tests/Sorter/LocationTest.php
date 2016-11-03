@@ -13,7 +13,6 @@ use ValueObjects\Geography\Street;
 use ValueObjects\Geography\Country;
 use ValueObjects\Geography\CountryCode;
 use ValueObjects\StringLiteral\StringLiteral;
-use \Mockery as m;
 
 class LocationTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +22,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $this->faker = \Faker\Factory::create();
     }
-    
+
     protected function getRandomAddress($name)
     {
         return new Address(
@@ -62,13 +61,13 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $bpass = $this->getRandomBoardingPass('Rome', 'Milan');
         $list = [$bpass];
         shuffle($list);
-        
-        $stack = new Stack;
-        foreach($list as $item) {
+
+        $stack = new Stack();
+        foreach ($list as $item) {
             $stack->push($item);
         }
 
-        $sorter = new Location;
+        $sorter = new Location();
         $sortedStack = $sorter->sort($stack);
 
         // there shouldn't really need to check if it's sorted
@@ -82,13 +81,13 @@ class LocationTest extends \PHPUnit_Framework_TestCase
 
         $list = [$bpass1, $bpass2];
         shuffle($list);
-        
-        $stack = new Stack;
-        foreach($list as $item) {
+
+        $stack = new Stack();
+        foreach ($list as $item) {
             $stack->push($item);
         }
 
-        $sorter = new Location;
+        $sorter = new Location();
         $sortedStack = $sorter->sort($stack);
 
         $this->assertCount(2, $sortedStack);
@@ -104,13 +103,13 @@ class LocationTest extends \PHPUnit_Framework_TestCase
 
         $list = [$bpass1, $bpass2, $bpass3];
         shuffle($list);
-        
-        $stack = new Stack;
-        foreach($list as $item) {
+
+        $stack = new Stack();
+        foreach ($list as $item) {
             $stack->push($item);
         }
 
-        $sorter = new Location;
+        $sorter = new Location();
         $sortedStack = $sorter->sort($stack);
 
         $this->assertCount(3, $sortedStack);
@@ -128,13 +127,13 @@ class LocationTest extends \PHPUnit_Framework_TestCase
 
         $list = [$bpass1, $bpass2, $bpass3, $bpass4];
         shuffle($list);
-        
-        $stack = new Stack;
-        foreach($list as $item) {
+
+        $stack = new Stack();
+        foreach ($list as $item) {
             $stack->push($item);
         }
 
-        $sorter = new Location;
+        $sorter = new Location();
         $sortedStack = $sorter->sort($stack);
 
         $this->assertCount(4, $sortedStack);
@@ -152,13 +151,13 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $bpass4 = $this->getRandomBoardingPass('Venice', 'New York');
 
         $list = [$bpass4, $bpass2, $bpass1, $bpass3];
-        
-        $stack = new Stack;
-        foreach($list as $item) {
+
+        $stack = new Stack();
+        foreach ($list as $item) {
             $stack->push($item);
         }
 
-        $sorter = new Location;
+        $sorter = new Location();
         $sortedStack = $sorter->sort($stack);
 
         $this->assertCount(4, $sortedStack);
@@ -182,13 +181,13 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $bpass10 = $this->getRandomBoardingPass('Sydney', 'Naples');
 
         $list = [$bpass4, $bpass2, $bpass1, $bpass3, $bpass5, $bpass6, $bpass7, $bpass8, $bpass9, $bpass10];
-        
-        $stack = new Stack;
-        foreach($list as $item) {
+
+        $stack = new Stack();
+        foreach ($list as $item) {
             $stack->push($item);
         }
 
-        $sorter = new Location;
+        $sorter = new Location();
         $sortedStack = $sorter->sort($stack);
 
         $this->assertCount(10, $sortedStack);

@@ -3,7 +3,6 @@
     "description": "Boarding Passes Sorter",
     "type": "project",
     "require": {
-        "silex/silex": "^2.0",
         "nicolopignatelli/valueobjects": "^4.1"
     },
     "require-dev": {

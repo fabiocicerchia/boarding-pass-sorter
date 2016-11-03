@@ -19,6 +19,10 @@ class Stack extends \SplStack
 
     /**
      * @param PassInterface $boardingPass The pass to be added
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return Stack
      */
     public function push($boardingPass) : Stack
     {

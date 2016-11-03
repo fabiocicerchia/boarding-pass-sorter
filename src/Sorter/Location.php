@@ -10,7 +10,8 @@ use BoardingPassSorter\Pass\Stack;
 class Location implements SorterInterface
 {
     /**
-     * @param array $sort The stack to be sorted
+     * @param Stack $sort        The stack to be sorted
+     * @param Stack $sortedStack The initial sorted stack to be used as base
      *
      * @return Stack
      */
@@ -35,7 +36,8 @@ class Location implements SorterInterface
                 // Prepend it if it's a past journey
                 $sortedStack->unshift($item);
             } else {
-                // If it's not either a destination or an origin, push it into the unmatched to be re-checked later on
+                // If it's not either a destination or an origin, push it into
+                // the unmatched to be re-checked later on
                 $unmatched->push($item);
             }
         }

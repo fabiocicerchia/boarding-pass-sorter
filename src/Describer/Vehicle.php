@@ -10,18 +10,34 @@ use BoardingPassSorter\Vehicle\VehicleInterface;
  */
 class Vehicle
 {
+    /**
+     * @var Vehicle
+     */
     protected $vehicle;
 
+    /**
+     * @param VehicleInterface $vehicle The vehicle to be described
+     */
     public function __construct(VehicleInterface $vehicle)
     {
         $this->vehicle = $vehicle;
     }
 
-    protected function describeFlight()
+    /**
+     * Describe specifically an Airplane.
+     *
+     * @return string
+     */
+    protected function describeAirplane()
     {
         return sprintf('%s', $this->vehicle->getIdentifier());
     }
 
+    /**
+     * Describe generically any Vehicle.
+     *
+     * @return string
+     */
     protected function describeGeneric()
     {
         $description = 'Prendere %s';
@@ -35,10 +51,13 @@ class Vehicle
         return vsprintf($description, $data);
     }
 
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
         if ($this->vehicle instanceof Airplane) {
-            return $this->describeFlight();
+            return $this->describeAirplane();
         }
 
         return $this->describeGeneric();
