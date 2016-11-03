@@ -1,5 +1,10 @@
 # Boarding Passes Sorter
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fabiocicerchia/boarding-pass-sorter/badges/quality-score.png)](https://scrutinizer-ci.com/g/fabiocicerchia/boarding-pass-sorter/)
+[![Build Status](https://travis-ci.org/fabiocicerchia/boarding-pass-sorter.svg?branch=master)](https://travis-ci.org/fabiocicerchia/boarding-pass-sorter)
+[![PHP 7 ready](http://php7ready.timesplinter.ch/fabiocicerchia/boarding-pass-sorter/master/badge.svg)](https://travis-ci.org/fabiocicerchia/boarding-pass-sorter)
+![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
+
 ## About the Challenge
 
 Abbiamo una serie di carte d'imbarco per vari mezzi di trasporto, che porteranno da un punto A a un punto B, con varie fermate lungo il percorso. Le carte d'imbarco non sono in ordine, non si sa dove inizia il viaggio, né dove finisce. Ogni carta d'imbarco contiene informazioni sull'assegnazione del posto e sui mezzi di trasporto (numero di volo, di autobus, ecc). Bisogna scrivere una API che permetta di ordinare questo tipo di lista e presentare una descrizione di come completare il nostro viaggio. Per esempio l'API dovrebbe essere in grado di prendere un insieme non ordinato di carte d'imbarco, fornite in un formato a scelta, e produrre questa lista:
@@ -69,3 +74,7 @@ Abbiamo una serie di carte d'imbarco per vari mezzi di trasporto, che porteranno
 or
 
     ./vendor/bin/phpunit
+
+## License
+
+This repo is licensed under the MIT license.

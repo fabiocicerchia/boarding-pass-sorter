@@ -1,0 +1,21 @@
+language: php
+
+php:
+  - '7.0'
+
+env:
+ - APP_ENV=dev
+
+branches:
+  only:
+    - master
+
+before_script:
+ - composer install
+
+script:
+ - ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_script:
+ - wget https://scrutinizer-ci.com/ocular.phar
+ - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
