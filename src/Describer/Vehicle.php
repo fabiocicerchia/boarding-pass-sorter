@@ -11,7 +11,7 @@ use BoardingPassSorter\Vehicle\VehicleInterface;
 class Vehicle
 {
     /**
-     * @var Vehicle
+     * @var VehicleInterface
      */
     protected $vehicle;
 

@@ -11,7 +11,8 @@ class Factory
     const TYPE_TRAIN    = 'train';
 
     /**
-     * @param array $data All the journey details
+     * @param string        $type       The vehicle type
+     * @param StringLiteral $identifier The vehicle identifier
      *
      * @throws \OutOfRangeException
      *

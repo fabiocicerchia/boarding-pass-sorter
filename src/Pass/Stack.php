@@ -8,7 +8,7 @@ namespace BoardingPassSorter\Pass;
 class Stack extends \SplStack
 {
     /**
-     * @param array $details A list of boarding pass
+     * @param array $boardingPasses A list of boarding pass
      */
     public function __construct(array $boardingPasses = [])
     {

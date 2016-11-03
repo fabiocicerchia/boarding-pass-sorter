@@ -1,6 +1,8 @@
 # Boarding Passes Sorter
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fabiocicerchia/boarding-pass-sorter/badges/quality-score.png)](https://scrutinizer-ci.com/g/fabiocicerchia/boarding-pass-sorter/)
+[![Code Coverage](https://scrutinizer-ci.com/g/fabiocicerchia/boarding-pass-sorter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/fabiocicerchia/boarding-pass-sorter/?branch=master)
+[![Code Climate](https://codeclimate.com/github/fabiocicerchia/boarding-pass-sorter/badges/gpa.svg)](https://codeclimate.com/github/fabiocicerchia/boarding-pass-sorter)
 [![Build Status](https://travis-ci.org/fabiocicerchia/boarding-pass-sorter.svg?branch=master)](https://travis-ci.org/fabiocicerchia/boarding-pass-sorter)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/fabiocicerchia/boarding-pass-sorter/master/badge.svg)](https://travis-ci.org/fabiocicerchia/boarding-pass-sorter)
 ![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
@@ -20,52 +22,54 @@ Abbiamo una serie di carte d'imbarco per vari mezzi di trasporto, che porteranno
 
 ## Example
 
-    require_once __DIR__ . '/../vendor/autoload.php';
+```php
+require_once __DIR__ . '/../vendor/autoload.php';
 
-    $api = new \BoardingPassSorter\Api;
-    $stack = $api->createEmptyStack();
+$api = new \BoardingPassSorter\Api;
+$stack = $api->createEmptyStack();
 
-    $stack->push(\BoardingPassSorter\Pass\Factory::createPass([
-        'origin'      => [
-            'name'           => 'Rome',
-            'streetName'     => 'Piazza dei Cinquecento',
-            'buildingNumber' => '1',
-            'state'          => 'Italy',
-            'city'           => 'Rome',
-            'state'          => 'Rome',
-            'postcode'       => '00100',
-            'countryCode'    => 'IT',
-            'departure'      => '2016-01-01 11:00:00',
-            'boarding'       => '2016-01-01 10:00:00',
-            'location'       => 'Binario 1',
-        ],
-        'destination' => [
-            'name'           => 'London',
-            'streetName'     => 'Oxford Street',
-            'buildingNumber' => '1',
-            'state'          => 'UK',
-            'city'           => 'London',
-            'state'          => 'London',
-            'postcode'       => 'W1D',
-            'countryCode'    => 'GB',
-            'arrival'        => '2016-01-01 13:00:00',
-            'location'       => 'Exit 1',
-        ],
-        'seat'        => '1A',
-        'vehicle'     => [
-            'type'        => 'airplane',
-            'identifier'  => 'FR3005',
-        ],
-        'details' => [
-            'gate' => 'A',
-            'note' => 'Possible strike action'
-        ]
-    ]));
+$stack->push(\BoardingPassSorter\Pass\Factory::createPass([
+    'origin'      => [
+        'name'           => 'Rome',
+        'streetName'     => 'Piazza dei Cinquecento',
+        'buildingNumber' => '1',
+        'state'          => 'Italy',
+        'city'           => 'Rome',
+        'state'          => 'Rome',
+        'postcode'       => '00100',
+        'countryCode'    => 'IT',
+        'departure'      => '2016-01-01 11:00:00',
+        'boarding'       => '2016-01-01 10:00:00',
+        'location'       => 'Binario 1',
+    ],
+    'destination' => [
+        'name'           => 'London',
+        'streetName'     => 'Oxford Street',
+        'buildingNumber' => '1',
+        'state'          => 'UK',
+        'city'           => 'London',
+        'state'          => 'London',
+        'postcode'       => 'W1D',
+        'countryCode'    => 'GB',
+        'arrival'        => '2016-01-01 13:00:00',
+        'location'       => 'Exit 1',
+    ],
+    'seat'        => '1A',
+    'vehicle'     => [
+        'type'        => 'airplane',
+        'identifier'  => 'FR3005',
+    ],
+    'details' => [
+        'gate' => 'A',
+        'note' => 'Possible strike action'
+    ]
+]));
 
-    // ...
+// ...
 
-    $route = $api->getRoute($stack);
-    echo $api->describe($route);
+$route = $api->getRoute($stack);
+echo $api->describe($route);
+```
 
 ## Run the Tests
 
@@ -74,6 +78,11 @@ Abbiamo una serie di carte d'imbarco per vari mezzi di trasporto, che porteranno
 or
 
     ./vendor/bin/phpunit
+
+## TODO
+
+ - Improve the performances of the sorting algorythm, currently O(n<sup>2</sup>/2)
+ - Add Silex as REST endpoint to query the library
 
 ## License
 
